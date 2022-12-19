@@ -254,8 +254,9 @@ const averageChange = function (totalChanges) {
 // we need a function to return the greatest increase in profits over the entire period including the date
 
 const greatestIncrease = function (financeData) {
-  let greatestIncrease = ["Jan-2010", 0];
+  let greatestIncrease = [];
   let diffEl = [];
+  let max;
 
   // lets first extract the complete array that includes the difference values concatanated to our array
 
@@ -270,7 +271,9 @@ const greatestIncrease = function (financeData) {
     if (concatArr[i][2] > 0) {
       diffEl.push(concatArr[i][2]);
 
-      greatestIncrease = Math.max(...diffEl);
+      greatestIncrease.push(concatArr[i][0], concatArr[i][2]);
+
+      // max = Math.max(...diffEl);
 
       // for (var j = 0; j < concatArr[i].length; j++) {
       //   diffEl.push(concatArr[i][2]);
