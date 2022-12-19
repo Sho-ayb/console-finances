@@ -268,14 +268,18 @@ const greatestIncrease = function (financeData) {
     // and then checking if it is the highest value using the Math.max() method
 
     if (concatArr[i][2] > 0) {
-      for (var j = 0; j < concatArr[i].length; j++) {
-        diffEl.push(concatArr[i][j]);
-        // max = Math.max(diffEl[j]);
+      diffEl.push(concatArr[i][2]);
 
-        if (diffEl[2] > greatestIncrease[1]) {
-          greatestIncrease = diffEl;
-        }
-      }
+      greatestIncrease = Math.max(...diffEl);
+
+      // for (var j = 0; j < concatArr[i].length; j++) {
+      //   diffEl.push(concatArr[i][2]);
+      //   // max = Math.max(diffEl[j]);
+
+      //   if (diffEl[2] > greatestIncrease[1]) {
+      //     greatestIncrease = diffEl;
+      //   }
+      // }
 
       // console.log(max);
 
