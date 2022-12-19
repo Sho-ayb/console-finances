@@ -82,7 +82,6 @@ greatestDecrease
   */
 
 // dataset as an array of arrays
-/*
 
 var finances = [
   ["Jan-2010", 867884],
@@ -173,24 +172,21 @@ var finances = [
   ["Feb-2017", 671099],
 ];
 
-
-*/
-
 // dataset to test
 
-var finances = [
-  ["Jan-2010", 884],
-  ["Feb-2010", 655],
-  ["Mar-2010", 1013],
-  ["Apr-2010", 417],
-  ["May-2010", -7503],
-  ["Jun-2010", 857],
-  ["Jul-2010", 3096],
-  ["Aug-2010", 885],
-  ["Sep-2010", -6386],
-  ["Oct-2010", 532],
-  ["Nov-2010", 3810],
-];
+// var finances = [
+//   ["Jan-2010", 884],
+//   ["Feb-2010", 655],
+//   ["Mar-2010", 1013],
+//   ["Apr-2010", 417],
+//   ["May-2010", -7503],
+//   ["Jun-2010", 857],
+//   ["Jul-2010", 3096],
+//   ["Aug-2010", 885],
+//   ["Sep-2010", -6386],
+//   ["Oct-2010", 532],
+//   ["Nov-2010", 3810],
+// ];
 
 // we need a function to calculate the total length of the array:  returning the total number of months in the array
 
@@ -269,41 +265,38 @@ const greatestIncrease = function (financeData) {
     // and then checking if it is the highest value using the Math.max() method
 
     if (concatArr[i][2] > 0) {
+      // lets push the 2nd element of the array in to an empty array so we can compare using the Math.max() method
+
       diffEl.push(concatArr[i][2]);
 
-      greatestIncrease.push([concatArr[i][0], concatArr[i][2]]);
+      // lets pass the result of the comparison to another variable
+      max = Math.max(...diffEl);
 
-      // max = Math.max(...diffEl);
+      // lets create another array so we can compare the max value against the original array and also return the array that matches
 
-      // for (var j = 0; j < concatArr[i].length; j++) {
-      //   diffEl.push(concatArr[i][2]);
-      //   // max = Math.max(diffEl[j]);
-
-      //   if (diffEl[2] > greatestIncrease[1]) {
-      //     greatestIncrease = diffEl;
-      //   }
-      // }
-
-      // console.log(max);
-
-      // if difference value is the highest then pass the complete array item which includes the date
-
-      // greatestIncrease = concatArr[i];
+      greatestIncrease.push([
+        concatArr[i][0],
+        concatArr[i][1],
+        concatArr[i][2],
+      ]);
     }
   }
 
-  console.log(diffEl);
+  // lets loop through this array and return only the array that matches the condition
 
-  console.log(greatestIncrease);
-
-  // return diffEl;
-  // return greatestIncrease;
+  for (let i = 0; i < greatestIncrease.length; i++) {
+    if (max === greatestIncrease[i][2]) {
+      return greatestIncrease[i];
+    }
+  }
 };
 
 // we need a function to return the greatest decrease in profits over the entire period including the date
 
 const greatestDecrease = function (financeData) {
-  let greatestDecrease;
+  let greatestDecrease = [];
+  let diffEl = [];
+  let min;
 
   // lets first extract the complete array that includes the difference values concatanated to our array
 
@@ -315,12 +308,30 @@ const greatestDecrease = function (financeData) {
     // lets create a condition here to find the greatest decrease in profits by checking if it is a negative number
     // and then checking if it is the lowest value using the Math.min() method
 
-    if (concatArr[i][2] < 0 && Math.min(concatArr[i][2])) {
-      greatestDecrease = concatArr[i];
+    if (concatArr[i][2] < 0) {
+      // lets create an array here to pass in to Math.min() nethod
+
+      diffEl.push(concatArr[i][2]);
+
+      min = Math.min(...diffEl);
+
+      // lets create another array so we can compare the min value against the original array and also return the array that matches
+
+      greatestDecrease.push([
+        concatArr[i][0],
+        concatArr[i][1],
+        concatArr[i][2],
+      ]);
     }
   }
 
-  return greatestDecrease;
+  // lets loop through this array and return only the array that matches the condition
+
+  for (var i = 0; i < greatestDecrease.length; i++) {
+    if (min === greatestDecrease[i][2]) {
+      return greatestDecrease[i];
+    }
+  }
 };
 
 // we need a function to print all the financial data to the console
@@ -346,8 +357,4 @@ const printToConsole = function () {
   `;
 };
 
-// console.info(printToConsole());
-
-console.log(difference(finances));
-
-greatestIncrease(finances);
+console.info(printToConsole());
