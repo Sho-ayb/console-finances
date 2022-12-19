@@ -82,6 +82,7 @@ greatestDecrease
   */
 
 // dataset as an array of arrays
+/*
 
 var finances = [
   ["Jan-2010", 867884],
@@ -172,14 +173,24 @@ var finances = [
   ["Feb-2017", 671099],
 ];
 
+
+*/
+
 // dataset to test
 
-// var finances = [
-//   ["Jan-2010", 884],
-//   ["Feb-2010", 655],
-//   ["Mar-2010", 1013],
-//   ["Apr-2010", 417],
-// ];
+var finances = [
+  ["Jan-2010", 884],
+  ["Feb-2010", 655],
+  ["Mar-2010", 1013],
+  ["Apr-2010", 417],
+  ["May-2010", -7503],
+  ["Jun-2010", 857],
+  ["Jul-2010", 3096],
+  ["Aug-2010", 885],
+  ["Sep-2010", -6386],
+  ["Oct-2010", 532],
+  ["Nov-2010", 3810],
+];
 
 // we need a function to calculate the total length of the array:  returning the total number of months in the array
 
@@ -243,45 +254,66 @@ const averageChange = function (totalChanges) {
 // we need a function to return the greatest increase in profits over the entire period including the date
 
 const greatestIncrease = function (financeData) {
+  let greatestIncrease = ["Jan-2010", 0];
+  let diffEl = [];
+
   // lets first extract the complete array that includes the difference values concatanated to our array
 
-  let totalChanges = difference(financeData);
+  let concatArr = difference(financeData);
 
   // lets first loop through this concatanated array: including difference values
 
-  for (var i = 0; i < totalChanges.length; i++) {
+  for (var i = 0; i < concatArr.length; i++) {
     // lets create a condition here to find the greatest increase in profits by checking if it is a positive number
     // and then checking if it is the highest value using the Math.max() method
 
-    if (totalChanges[i][2] > 0 && Math.max(totalChanges[i][2])) {
+    if (concatArr[i][2] > 0) {
+      for (var j = 0; j < concatArr[i].length; j++) {
+        diffEl.push(concatArr[i][j]);
+        // max = Math.max(diffEl[j]);
+
+        if (diffEl[2] > greatestIncrease[1]) {
+          greatestIncrease = diffEl;
+        }
+      }
+
+      // console.log(max);
+
       // if difference value is the highest then pass the complete array item which includes the date
 
-      totalChanges = totalChanges[i];
+      // greatestIncrease = concatArr[i];
     }
   }
 
-  return totalChanges;
+  console.log(diffEl);
+
+  console.log(greatestIncrease);
+
+  // return diffEl;
+  // return greatestIncrease;
 };
 
 // we need a function to return the greatest decrease in profits over the entire period including the date
 
 const greatestDecrease = function (financeData) {
+  let greatestDecrease;
+
   // lets first extract the complete array that includes the difference values concatanated to our array
 
-  let totalChanges = difference(financeData);
+  let concatArr = difference(financeData);
 
   // lets first loop through this concatanated array: including difference values
 
-  for (var i = 0; i < totalChanges.length; i++) {
+  for (var i = 0; i < concatArr.length; i++) {
     // lets create a condition here to find the greatest decrease in profits by checking if it is a negative number
     // and then checking if it is the lowest value using the Math.min() method
 
-    if (totalChanges[i][2] < 0 && Math.max(totalChanges[i][2])) {
-      totalChanges = totalChanges[i];
+    if (concatArr[i][2] < 0 && Math.min(concatArr[i][2])) {
+      greatestDecrease = concatArr[i];
     }
   }
 
-  return totalChanges;
+  return greatestDecrease;
 };
 
 // we need a function to print all the financial data to the console
@@ -307,6 +339,8 @@ const printToConsole = function () {
   `;
 };
 
-console.info(printToConsole());
+// console.info(printToConsole());
 
 console.log(difference(finances));
+
+greatestIncrease(finances);
