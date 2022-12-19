@@ -63,7 +63,7 @@ greatestDecrease
 
   - Work out how many months there are in the array of arrays - using Array.prototype.length property. 
 
-  - Work out the *netTotal* amount of profit/loss on the entire array: we can use the Array.prototyoe.reduce method. Which will return the sum of all the elements in the array and because there are negative values this will provide us with a net total amount. 
+  - Work out the *netTotal* amount of profit/loss on the entire array: we can use the Array.prototype.reduce method. Which will return the sum of all the elements in the array and because there are negative values this will provide us with a net total amount. 
 
   - Work out the total change from month to month:  totalChange variable should initially be an empty array so that we can keep track of the month to month changes. 
 
@@ -77,37 +77,136 @@ greatestDecrease
 
   - print all the above results to the console using console.log(). 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-- - - - - -- -- - - - -- - -  - -- - - - - - - - - - - - - - - - - - - - - - - -- - - - - - - - - - -- - 
 
 */
 
+// dataset
+
+var finances = [
+  ["Jan-2010", 884],
+  ["Feb-2010", 655],
+  ["Mar-2010", 1013],
+  ["Apr-2010", 417],
+];
+
+// variables
+
+var totalsArray = [];
+
+// we need a function to calculate the total length of the array:  returning the total number of months in the array
+
+const totalMonths = function (financeData) {
+  const totalMths = financeData.length;
+
+  return totalMths;
+};
+
+// we need a function to calculate to netTotal of the data: returning the netTotal amount
+
+const netTotal = function (financeData) {
+  // lets map through the array and return an array with only the totals
+
+  totalsArray = financeData.map((totals) => {
+    return totals[1];
+  });
+
+  // lets calculate the netTotal from the new array of totals using reduce method
+
+  const net = totalsArray.reduce((prev, curr) => {
+    return prev + curr;
+  });
+
+  return net;
+};
+
+// we need a function to keep track of the difference between amounts in the totalsArray.
+
+const difference = function (totals) {
+  let totalChanges = [];
+
+  // lets loop through the array and store the results in to an empty array
+
+  for (var i = 1; i < totals.length; i++) {
+    var diff = totals[i][1] - totals[i - 1][1];
+
+    totalChanges.push(diff);
+  }
+
+  return totalChanges;
+};
+
+// we need a function to calculate the average change from the totalChanges array.
+
+const averageChange = function (totalChanges) {
+  const average = totalChanges.reduce((prev, curr) => prev + curr);
+
+  return average / totalMonths(finances);
+};
+
+// we need a function to return the greatest increase in profits over the entire period including the date
+
+const greatestIncrease = function (financeData) {
+  // lets first loop through the array and extract all the numbers here
+
+  // lets create an empty array to store all the totals
+
+  numberTotals = [];
+
+  for (var i = 0; i < financeData.length; i++) {
+    const totals = financeData[i][1];
+
+    numberTotals.push(totals);
+  }
+
+  // lets first find the max value in the array: using the spread operator to pass in all the elements of the array to max method
+
+  const max = Math.max(...numberTotals);
+
+  const findMaxEl = financeData.find((el) => el[1] === max);
+
+  return findMaxEl;
+};
+
+// we need a function to return the greatest decrease in profits over the entire period including the date
+
+const greatestDecrease = function (financeData) {
+  // lets first loop through the array and extract all the numbers here
+
+  // lets create an empty array to store all the totals
+
+  const numberTotals = [];
+
+  for (var i = 0; i < financeData.length; i++) {
+    const totals = financeData[i][1];
+
+    numberTotals.push(totals);
+  }
+
+  // return numberTotals;
+
+  // lets first find the min value in the array: using the spread operator to pass in all the elements of the array to the min method
+
+  const min = Math.min(...numberTotals);
+
+  const findMinEl = financeData.find((el) => el[1] === min);
+
+  return findMinEl;
+};
+
+console.log(totalMonths(finances));
+console.log(netTotal(finances));
+console.log(difference(finances));
+
+console.log(averageChange(difference(finances)));
+
+console.log(greatestIncrease(finances));
+
+console.log(greatestDecrease(finances));
+
 // dataset as an array of arrays
+
+/*
 
 var finances = [
   ["Jan-2010", 867884],
@@ -197,3 +296,5 @@ var finances = [
   ["Jan-2017", 138230],
   ["Feb-2017", 671099],
 ];
+
+*/
