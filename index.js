@@ -271,7 +271,7 @@ const greatestIncrease = function (financeData) {
     if (concatArr[i][2] > 0) {
       diffEl.push(concatArr[i][2]);
 
-      greatestIncrease.push(concatArr[i][0], concatArr[i][2]);
+      greatestIncrease.push([concatArr[i][0], concatArr[i][2]]);
 
       // max = Math.max(...diffEl);
 
