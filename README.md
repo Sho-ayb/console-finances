@@ -34,6 +34,6 @@ Your final code should print the analysis to the console.
 
 ## Images of final result to the console
 
-![./console-capture-of-finacial-report.JPG]
+![Financial Report In The Console](./console-capture-of-financial-report.JPG)
 
 ## Link to the deployed application
