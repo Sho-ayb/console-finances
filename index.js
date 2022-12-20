@@ -191,12 +191,12 @@ var finances = [
 // we need a function to calculate the total length of the array:  returning the total number of months in the array
 
 const totalMonths = function (financeData) {
-  const totalMths = financeData.length;
+  const totalMths = financeData.length - 1; // minus one because the array is zero indexed
 
   return totalMths;
 };
 
-// we need a function to calculate to netTotal of the data: returning the netTotal amount
+// we need a function to calculate the netTotal of the data: returning the netTotal amount
 
 const netTotal = function (financeData) {
   // lets map through the array and return an array with only the totals
@@ -214,23 +214,24 @@ const netTotal = function (financeData) {
   return net;
 };
 
-// we need a function to keep track of the difference between amounts in the totalsArray.
+// we need a function to keep track of the difference between amounts in the totalsArray
 
 const difference = function (totals) {
   let totalChanges = [];
 
-  // lets loop through the array and store the results in to an empty array
+  // lets loop through the array and store the results in to an empty array - we start the loop at 1 because we need the 2nd element in the array and substract it with the 1st
 
   for (var i = 1; i < totals.length; i++) {
-    var diff = totals[i][1] - totals[i - 1][1];
+    var diff = totals[i][1] - totals[i - 1][1]; // totals[i -1] will give us the 1st element in the array
 
-    totalChanges.push(totals[i].concat(diff));
+    totalChanges.push(totals[i].concat(diff)); // using the Array.prototype.concat() method will append the diff result to the end of the array
   }
 
   return totalChanges;
 };
 
-// we need a function to calculate the average change from the totalChanges array.
+// we need a function to calculate the average change from the totalChanges array. This totalChanges argument of the function will recieve the mutated array
+// we created in the difference function
 
 const averageChange = function (totalChanges) {
   let diffTotals = [];
@@ -239,12 +240,12 @@ const averageChange = function (totalChanges) {
   for (var i = 0; i < totalChanges.length; i++) {
     const differenceEl = totalChanges[i][2];
 
-    diffTotals.push(differenceEl);
+    diffTotals.push(differenceEl); // we have extracted the difference total results from the array so we can calculate the average change on this array
 
     average = diffTotals.reduce((prev, curr) => prev + curr);
   }
 
-  return average / totalMonths(finances);
+  return average / totalMonths(finances); // average is returned by dividing by the total months - we do this by simply invoking the function and passing in the original array
 };
 
 // we need a function to return the greatest increase in profits over the entire period including the date
@@ -269,7 +270,7 @@ const greatestIncrease = function (financeData) {
 
       diffEl.push(concatArr[i][2]);
 
-      // lets pass the result of the comparison to another variable
+      // we can now pass this array using the spread operator to our Math.max() method and pass this result to another variable to use later
       max = Math.max(...diffEl);
 
       // lets create another array so we can compare the max value against the original array and also return the array that matches
