@@ -83,8 +83,6 @@ greatestDecrease
 
 // dataset as an array of arrays
 
-/*
-
 var finances = [
   ["Jan-2010", 867884],
   ["Feb-2010", 984655],
@@ -174,24 +172,21 @@ var finances = [
   ["Feb-2017", 671099],
 ];
 
-
-*/
-
 // dataset to test
 
-var finances = [
-  ["Jan-2010", 884],
-  ["Feb-2010", 655],
-  ["Mar-2010", 1013],
-  ["Apr-2010", 417],
-  ["May-2010", -7503],
-  ["Jun-2010", 857],
-  ["Jul-2010", 3096],
-  ["Aug-2010", 885],
-  ["Sep-2010", -6386],
-  ["Oct-2010", 532],
-  ["Nov-2010", 3810],
-];
+// var finances = [
+//   ["Jan-2010", 884],
+//   ["Feb-2010", 655],
+//   ["Mar-2010", 1013],
+//   ["Apr-2010", 417],
+//   ["May-2010", -7503],
+//   ["Jun-2010", 857],
+//   ["Jul-2010", 3096],
+//   ["Aug-2010", 885],
+//   ["Sep-2010", -6386],
+//   ["Oct-2010", 532],
+//   ["Nov-2010", 3810],
+// ];
 
 // we need a function to calculate the total length of the array:  returning the total number of months in the array
 
