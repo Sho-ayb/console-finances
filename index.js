@@ -191,7 +191,7 @@ var finances = [
 // we need a function to calculate the total length of the array:  returning the total number of months in the array
 
 const totalMonths = function (financeData) {
-  const totalMths = financeData.length - 1; // minus one because the array is zero indexed
+  const totalMths = financeData.length;
 
   return totalMths;
 };
@@ -359,3 +359,7 @@ const printToConsole = function () {
 };
 
 console.info(printToConsole());
+
+// printing to console to show the difference totals included in the mutated array
+
+console.log(difference(finances));
