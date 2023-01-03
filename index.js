@@ -224,7 +224,7 @@ const difference = function (totals) {
   for (var i = 1; i < totals.length; i++) {
     var diff = totals[i][1] - totals[i - 1][1]; // totals[i -1] will give us the 1st element in the array
 
-    totalChanges.push(totals[i].concat(diff)); // using the Array.prototype.concat() method will append the diff result to the end of the array
+    totalChanges.push(totals[i - 1].concat(diff)); // using the Array.prototype.concat() method will append the diff result to the end of the array
   }
 
   return totalChanges;
