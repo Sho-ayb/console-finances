@@ -16,7 +16,7 @@ The average of the changes in Profit/Losses over the entire period.
      - You will need to track what the total change in profits are from month to month and then find the average. (Total/Number of months -1)
 
 
-     The greatest increase in profits (date and amount) over the entire period.
+The greatest increase in profits (date and amount) over the entire period.
      
 The greatest decrease in losses (date and amount) over the entire period.
 
@@ -83,7 +83,7 @@ greatestDecrease
 
 // dataset as an array of arrays
 
-var finances = [
+const finances = [
   ["Jan-2010", 867884],
   ["Feb-2010", 984655],
   ["Mar-2010", 322013],
@@ -172,7 +172,9 @@ var finances = [
   ["Feb-2017", 671099],
 ];
 
-// dataset to test
+// console.log("finances", finances);
+
+// // dataset to test
 
 // var finances = [
 //   ["Jan-2010", 884],
@@ -188,10 +190,10 @@ var finances = [
 //   ["Nov-2010", 3810],
 // ];
 
-// we need a function to calculate the total length of the array:  returning the total number of months in the array
+// // we need a function to calculate the total length of the array:  returning the total number of months in the array
 
 const totalMonths = function (financeData) {
-  const totalMths = financeData.length - 1;
+  const totalMths = financeData.length;
 
   return totalMths;
 };
@@ -216,36 +218,47 @@ const netTotal = function (financeData) {
 
 // we need a function to keep track of the difference between amounts in the totalsArray
 
-const difference = function (totals) {
+const difference = function (financeData) {
   let totalChanges = [];
 
   // lets loop through the array and store the results in to an empty array - we start the loop at 1 because we need the 2nd element in the array and substract it with the 1st
 
-  for (var i = 1; i < totals.length; i++) {
-    var diff = totals[i][1] - totals[i - 1][1]; // totals[i -1] will give us the 1st element in the array
+  // pushing the first element to the array first
 
-    totalChanges.push(totals[i - 1].concat(diff)); // using the Array.prototype.concat() method will append the diff result to the end of the array
+  totalChanges.push(financeData[0]);
+
+  for (var i = 1; i < financeData.length; i++) {
+    var diff = financeData[i][1] - financeData[i - 1][1]; // totals[i -1] will give us the 1st element in the array
+
+    totalChanges.push(financeData[i].concat(diff)); // using the Array.prototype.concat() method will append the diff result to the end of the array
   }
 
   return totalChanges;
 };
 
-// we need a function to calculate the average change from the totalChanges array. This totalChanges argument of the function will recieve the mutated array
-// we created in the difference function
+// we need a function to calculate the average change from the totalChanges array. This totalChanges argument of the function will recieve the mutated array we created in the difference function
 
-const averageChange = function (totalChanges) {
+const averageChange = function (financeData) {
   let diffTotals = [];
   let average;
 
-  for (var i = 0; i < totalChanges.length; i++) {
-    const differenceEl = totalChanges[i][2];
+  // we need to push the first arrays total first before the other diff totals that are at position 2 in the array, so that is also included in the average calculation
+
+  diffTotals.push(financeData[0][1]);
+
+  for (var i = 1; i < financeData.length; i++) {
+    const differenceEl = financeData[i][2];
 
     diffTotals.push(differenceEl); // we have extracted the difference total results from the array so we can calculate the average change on this array
 
-    average = diffTotals.reduce((prev, curr) => prev + curr);
+    average =
+      diffTotals.reduce((prev, curr) => prev + curr) / totalMonths(finances);
   }
+  // console logging the the difference totals and the average return here
+  console.log(diffTotals);
+  console.log("average", average);
 
-  return average / totalMonths(finances); // average is returned by dividing by the total months - we do this by simply invoking the function and passing in the original array
+  return average; // average is returned by dividing by the total months - we do this by simply invoking the function and passing in the original array
 };
 
 // we need a function to return the greatest increase in profits over the entire period including the date
@@ -339,10 +352,10 @@ const greatestDecrease = function (financeData) {
 
 const printToConsole = function () {
   return `
-  
+
     Financial Analysis
     -----------------------------------------------------------
-    
+
     Total Months: ${totalMonths(finances)}
     Total: £${netTotal(finances)}
     Average Change: £${averageChange(difference(finances)).toFixed(2)}
@@ -351,10 +364,10 @@ const printToConsole = function () {
   })
     Greatest decrease in profits: ${greatestDecrease(finances)[0]} (£${
     greatestDecrease(finances)[1]
-  }) 
-  
+  })
+
     -----------------------------------------------------------
-    
+
   `;
 };
 
@@ -363,3 +376,36 @@ console.info(printToConsole());
 // printing to console to show the difference totals included in the mutated array
 
 console.log(difference(finances));
+
+// console.log("-----------------------------------------------------------");
+
+// console.log("New code from Dennis");
+
+// let x = 0;
+// let y = 0;
+// let z = 0;
+
+// for (let i = 0; i < finances.length; i++) {
+//   console.log(finances[i]); // this logs the whole array
+
+//   for (let j = 0; j < finances[i].length; j++) {
+//     console.log("inner array", finances[i][j]);
+
+//     if (typeof finances[i][j] != "string") {
+//       x += finances[i][j]; // this returns all the net total of totals
+
+//       y = finances[i][j] - z;
+//       z = finances[i][j];
+
+//       console.log("net totals", x);
+//       console.log("change", y);
+
+//       console.log("z", z);
+//     }
+//   }
+// }
+
+// will need to push y to a new array
+//average = Math.round((netChangeSum / 86) * 100) / 100;
+
+// note: there is a problem with your difference totals - it does not include the first element which should be the total of the array - 867884 - and then the difference are calculated and should be added to the array starting from the 2nd element of the array.
