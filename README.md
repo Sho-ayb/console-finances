@@ -1,4 +1,4 @@
-# trilogy-bootcamp-console-finances
+# console-finances
 
 ## Working with Arrays - Analysing the financial dataset of a company.
 
